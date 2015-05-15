@@ -1,0 +1,30 @@
+{
+  "name": "handwriting",
+  "version": "0.0.0",
+  "homepage": "https://github.com/bguiz/handwriting",
+  "authors": [
+    "bguiz"
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "license": "GPLv3",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "keywords": [
+    "handwriting",
+    "character",
+    "recognition",
+    "OCR",
+    "stroke",
+    "scribble",
+    "gesture"
+  ],
+  "dependencies": {
+  }
+}
