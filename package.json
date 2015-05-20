@@ -4,7 +4,7 @@
   "description": "Handwriting and stroke recognition library",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./node_modules/jasmine-node/bin/jasmine-node test"
   },
   "repository": {
     "type": "git",
@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/bguiz/handwriting/issues"
   },
-  "homepage": "https://github.com/bguiz/handwriting"
+  "homepage": "https://github.com/bguiz/handwriting",
+  "devDependencies": {
+    "jasmine-node": "^2.0.0"
+  }
 }
