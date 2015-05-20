@@ -1,6 +1,6 @@
 {
   "name": "handwriting",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Handwriting and stroke recognition library",
   "main": "index.js",
   "scripts": {
