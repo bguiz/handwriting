@@ -87,5 +87,54 @@ describe('[angle-levenshtein]', function() {
 
       done();
     });
+    
+
+    it('Should match the angles in a Z', function(done) {
+      var input = [90, 230, 80];
+      var match = [90, 225, 90];
+
+      var matrix;
+      expect(function() {
+        matrix = instance.angleLevenshteinCost(input, match);
+      }).not.toThrow();
+
+      expect(matrix.length).toEqual(4);
+      expect(matrix[0].length).toEqual(4);
+
+      expect(matrix[match.length][input.length]).toEqual(15);
+
+      expect(matrix).toEqual([
+        [0, 180, 360, 540],
+        [180, 0, 140, 360],
+        [360, 135, 5, 150],
+        [540, 135, 145, 15]
+      ]);
+
+      done();
+    });
+
+    it('Should match the angles in a Z with a middle section with more points', function(done) {
+      var input = [90, 230, 235, 80];
+      var match = [90, 225, 90];
+
+      var matrix;
+      expect(function() {
+        matrix = instance.angleLevenshteinCost(input, match);
+      }).not.toThrow();
+
+      expect(matrix.length).toEqual(4);
+      expect(matrix[0].length).toEqual(5);
+
+      expect(matrix[match.length][input.length]).toEqual(25);
+
+      expect(matrix).toEqual([
+        [0, 180, 360, 540, 720],
+        [180, 0, 140, 360, 370],
+        [360, 135, 5, 15, 160],
+        [540, 135, 145, 150, 25]
+      ]);
+
+      done();
+    });
   });
 });
