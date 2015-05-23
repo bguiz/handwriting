@@ -180,8 +180,7 @@
    * @return {Number}        Smallest difference between two angles in degrees
    */
   function angleDifference(angle1, angle2) {
-    var diff = (Math.abs(angle2 - angle1 ) % 360);
-    return (diff > 180) ? 360 - diff : diff;
+    return 180 - Math.abs(Math.abs(angle2 - angle1) - 180) % 360;
   }
 
   function registerCharacters() {
