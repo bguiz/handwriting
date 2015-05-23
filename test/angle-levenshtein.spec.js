@@ -18,6 +18,16 @@ describe('[angle-levenshtein]', function() {
 
       expect(instance.angleDifference(90, 270)).toEqual(180);
       expect(instance.angleDifference(270, 90)).toEqual(180);
+
+      expect(instance.angleDifference(450, 270)).toEqual(180);
+      expect(instance.angleDifference(270, 450)).toEqual(180);
+
+      expect(instance.angleDifference(-180, 180)).toEqual(0);
+
+      expect(instance.angleDifference(-90, 90)).toEqual(180);
+      expect(instance.angleDifference(90, -90)).toEqual(180);
+      expect(instance.angleDifference(-90, 810)).toEqual(180);
+
       done();
     });
   });
