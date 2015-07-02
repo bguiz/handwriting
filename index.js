@@ -26,7 +26,7 @@
   }
 
   var characters = [];
-  var MAXIMUM_COST_FOR_MATCH_THRESHOLD = 180;
+  var MAXIMUM_COST_FOR_MATCH_THRESHOLD = 1200;
 
   function recognisePoints(inputStrokes) {
     // break up input strokes into sections
@@ -51,7 +51,11 @@
     });
 
     // iterate over each registered character where the number of strokes is the same
-    var costs = characters.map(function(char) {
+    var costs = characters
+    .filter(function(char) {
+      return (char.strokes.length === inputStrokeAngles.length);
+    })
+    .map(function(char) {
       var cost = calculateCost(inputStrokeAngles, char.strokes);
       // use a cost function to determine how close/ far the input strokes match this character
       return {
@@ -65,6 +69,8 @@
       return a.cost - b.cost;
     });
 
+    console.log('sortedCosts', sortedCosts);
+
     if (sortedCosts[0].cost <= MAXIMUM_COST_FOR_MATCH_THRESHOLD) {
       return sortedCosts[0];
     }
@@ -73,11 +79,24 @@
     }
   }
 
-  function calculateCost(inputStrokeDirections, matchStrokeDirections) {
-    var levenshteinCostMatrix = angleLevenshteinCost(inputStrokeDirections, matchStrokeDirections);
-    //NOTE cost could be calculated using multiple algorithms,
+  function calculateCost(inputStrokeAngles, matchStrokeAngles) {
+    var levenshteinCost = angleLevenshteinMultistrokeCost(inputStrokeAngles, matchStrokeAngles);
+    //NOTE cost could be calculatated using multiple algorithms,
     // and their aggregate used. At the moment only one algorithm is used.
-    return levenshteinCostMatrix[matchStrokeDirections.length][inputStrokeDirections.length];
+    return levenshteinCost;
+  }
+
+  function angleLevenshteinMultistrokeCost(inputStrokeAngles, matchStrokeAngles) {
+    if (inputStrokeAngles.length !== matchStrokeAngles.length) {
+      throw new Error('Input must have a same number of strokes as match');
+    }
+    var cost = 0;
+    for (var i = 0; i < inputStrokeAngles.length; ++i)  {
+      var matrix =
+        angleLevenshteinCost(inputStrokeAngles[i], matchStrokeAngles[i]);
+      cost += matrix[matchStrokeAngles[i].length][inputStrokeAngles[i].length];
+    }
+    return cost;
   }
 
   /**
