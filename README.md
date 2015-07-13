@@ -9,6 +9,11 @@ Handwriting and stroke recognition library
 Note that this is very much a work in progress,
 so do not expect anything to be stable.
 
+## Limitations 
+
+- Only single stroke characters currently can be recognised.
+- Not all characters are currently included 
+
 ## Contributing
 
 This repository uses the **git flow** branching strategy.
